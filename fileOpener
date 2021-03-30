@@ -1,0 +1,47 @@
+import os
+
+files = os.listdir()
+filesArray = []
+lastFile = files[len(files) - 1]
+
+def listFiles(array):
+    i = 0
+    order = 1
+    while i < len(array):
+        print(str(order) + ") " + array[i])
+        i += 1
+        order += 1
+
+def fileOpener(array):
+    pass
+    enter = input("Enter file number: ")
+    if int(enter) > len(array) or int(enter) <= 0:
+        print("There`s no such file with number of " + enter)
+    else:
+        with open(array[int(enter) - 1]) as file:
+            content = file.read()
+            print(content)
+
+fileLetter = input("Search: ")
+
+for certainFile in files:
+    if fileLetter.upper() == certainFile[0] or fileLetter.lower() == certainFile[0]:
+        filesArray.append(certainFile)
+
+if fileLetter == '*':
+    listFiles(files)
+    fileOpener(files)
+
+elif len(filesArray) == 0:
+    print("file is not found")
+
+elif len(filesArray) == 1:
+    with open(filesArray[0]) as file:
+        content = file.read()
+        print(content)
+
+elif len(filesArray) != 0 and len(filesArray) != 1:
+    i = 0
+    order = 1
+    listFiles(filesArray)
+    fileOpener(filesArray)
